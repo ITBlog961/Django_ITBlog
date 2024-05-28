@@ -1,0 +1,35 @@
+{% extends 'blog/base_.html' %}
+{% load static %}
+
+{% block content %}
+<ul class="articles">
+    {% for p in page_obj %}
+        <li class="article">
+            {% if p.photo %}
+                <p><img src="{{ p.photo.url }}" alt="{{ p.title }}"></p>
+            {% endif %}
+            <h2>{{ p.title }}</h2>
+            <p>{{ p.content|linebreaksbr|truncatewords:50 }}</p>
+            <a href="{{ p.get_absolute_url }}" class="btn">Читати далі</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Перша</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Попередня</a>
+        {% endif %}
+
+        <span class="current">
+            Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Наступна</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Остання &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

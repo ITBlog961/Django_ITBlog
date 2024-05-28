@@ -1,0 +1,19 @@
+{% extends 'blog/base_.html' %}
+
+{% block content %}
+<h1>Увійти або зареєструватися</h1>
+
+<h2>Увійти</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ login_form.as_p }}
+    <button type="submit" name="login">Увійти</button>
+</form>
+
+<h2>Реєстрація</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ register_form.as_p }}
+    <button type="submit" name="register">Зареєструватися</button>
+</form>
+{% endblock %}

@@ -1,0 +1,411 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'blog/css/styles.css' %}" rel="stylesheet" />
+	<link rel="icon" href="{% static 'blog/images/icon.png' %}" type="image/x-icon" />
+	<style>
+	body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a2e;
+    color: #eaeaea;
+}
+
+header {
+    background: linear-gradient(90deg, #16213e, #0f3460); /* Градієнт */
+    color: #fff;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header .logo img {
+    height: 100px; /* Максимальна висота для логотипу */
+    width: auto; /* Збереження пропорцій зображення */
+}
+
+header nav {
+    margin-left: 20px; /* Розміщення головного меню вліво */
+}
+
+header nav ul.main-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+header nav ul.main-menu li {
+    margin: 0 15px;
+}
+
+header nav ul.main-menu li.right {
+    margin-left: auto;
+}
+
+header nav ul.main-menu li a {
+    color: #eaeaea;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+header nav ul.main-menu li a:hover {
+    background: #0f3460;
+    border-radius: 4px;
+    color: #ffffff;
+}
+
+.content {
+    display: flex;
+    margin: 20px;
+    gap: 20px;
+}
+
+.categories {
+    width: 220px;
+    background: linear-gradient(180deg, #16213e, #0f3460); /* Градієнт */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Розміщення категорій по центру */
+}
+
+.categories ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2em;
+}
+
+.categories ul li {
+    margin: 15px 0; /* Збільшення вертикального інтервалу */
+}
+
+.categories ul li,
+.categories ul li a {
+    text-decoration: none;
+    color: #eaeaea;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 10px;
+    border-radius: 5px; /* Заокруглення країв */
+}
+
+.categories ul li a:hover {
+    color: #4facfe;
+    background-color: rgba(79, 172, 254, 0.1); /* Зміна кольору при наведенні */
+}
+
+main {
+    flex: 1;
+}
+
+.articles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.articles li {
+    list-style: none;
+}
+
+.article {
+    background: linear-gradient(180deg, #16213e, #0f3460); /* Градієнт */
+    padding: 20px;
+    border: 1px solid #0f3460;
+    width: calc(33% - 20px);
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px; /* Заокруглення країв блоків статей */
+    transition: box-shadow 0.3s ease;
+}
+
+.article:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.article img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.article h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #eaeaea;
+}
+
+.article p {
+    font-size: 1em;
+    color: #b0b0b0;
+}
+
+.article .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    color: #fff;
+    background: #4facfe;
+    text-decoration: none;
+    margin-top: 10px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.article .btn:hover {
+    background: #2a9df4;
+}
+
+footer {
+    background: linear-gradient(90deg, #16213e, #0f3460); /* Градієнт */
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+footer .social-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+footer .social-links li {
+    margin: 0 10px;
+}
+
+footer .social-links li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .social-links li a:hover {
+    color: #4facfe;
+}
+
+/* Адаптивність */
+
+@media (max-width: 1024px) {
+    .article {
+        width: calc(50% - 20px);
+    }
+
+    header nav ul.main-menu {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .categories {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .article {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    header .logo img {
+        height: 40px; /* Зменшення розміру логотипу на малих екранах */
+    }
+
+    header nav ul.main-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    header nav ul.main-menu li {
+        margin: 10px 0;
+    }
+
+    .categories ul li {
+        margin: 10px 0;
+    }
+}
+
+.selected {
+    border: 2px solid #4facfe; /* Колір рамки для виділеної категорії */
+    border-radius: 5px; /* Заокруглення країв рамки */
+}
+
+.article img {
+    display: block;
+    margin: 0 auto 15px;
+    max-width: 100%;
+    clear: both; /* Додає вирівнювання тексту починаючи з нового рядка після зображення */
+}
+
+.article-detail img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; /* Змінюємо максимальну висоту зображення */
+}
+
+.article-detail p {
+    font-size: 1.5em; /* Збільшуємо розмір тексту */
+}
+
+.article-content p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+article .content p {
+    margin-bottom: 15px; /* Встановлює відступ між абзацами */
+    /* Додаткові стилі за необхідності */
+}
+
+/* Стилі для форми додавання статті */
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #16213e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+form p {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-error {
+    color: #ff6b6b;
+    font-size: 0.9em;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #1a1a2e;
+    color: #eaeaea;
+}
+
+form input[type="file"] {
+    padding: 3px;
+}
+
+form button {
+    background: #4facfe;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+form button:hover {
+    background: #2a9df4;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.step-links {
+    display: flex;
+    gap: 10px;
+}
+
+.step-links a, .step-links span {
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #0f3460;
+    color: #eaeaea;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.step-links a:hover {
+    background-color: #4facfe;
+}
+	</style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="{% url 'home' %}"><img src="{% static 'blog/images/icon.png' %}" alt="Logo"></a>
+        </div>
+        <nav>
+            <ul class="main-menu">
+                {% for m in menu %}
+                    <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="content">
+        <aside class="categories">
+            <ul>
+				{% if cat_selected == 0 %}
+					<li class = 'selected'>Усі категорії</li>
+				{% else %}
+					<li><a href="{% url 'home' %}">Усі категорії</a></li>
+				{% endif %}
+                
+				{% for c in cats %}
+					{% if c.pk == cat_selected %}
+						<li class = 'selected'>{{ c.name }}</li>
+					{% else %}
+						<li><a href = '{{ c.get_absolute_url }}'>{{ c.name }}</a></li>
+					{% endif %}
+				{% endfor %}
+            </ul>
+        </aside>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 IT-блог</p>
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">LinkedIn</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

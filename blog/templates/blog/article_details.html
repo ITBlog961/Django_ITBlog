@@ -1,0 +1,16 @@
+{% extends 'blog/base_.html' %}
+{% load static %}
+
+{% block content %}
+<article class="article-detail">
+    <h2>{{ article.title }}</h2>
+    <p>Категорія: <a href="{{ article.category.get_absolute_url }}">{{ article.cat }}</a></p>
+    <p>Час публікації: {{ article.time_create }}</p>
+    {% if article.photo %}
+        <img src="{{ article.photo.url }}" alt="{{ article.title }}">
+    {% endif %}
+    <div class="content_">
+        {{ article.content|safe|linebreaks }}
+    </div>
+</article>
+{% endblock %}
